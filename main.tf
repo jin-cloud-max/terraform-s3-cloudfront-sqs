@@ -2,7 +2,7 @@ module "s3" {
   source         = "./modules/s3"
   s3_bucket_name = "rocketseat-iac-jin"
   s3_tags = {
-    Name      = "rocketseat-iac-jin-${terraform.workspace}"
+    Name      = "${var.s3_bucket_name}-${terraform.workspace}"
     Context   = terraform.workspace
     IaC       = true
     CreatedBy = "Terraform"
@@ -26,7 +26,7 @@ module "cloudfront" {
 
 module "sqs" {
   source     = "terraform-aws-modules/sqs/aws"
-  name       = "rocketseat-iac-sqs-${terraform.workspace}"
+  name       = "${var.sqs_queue_name}-${terraform.workspace}"
   create_dlq = true
 
   tags = {
